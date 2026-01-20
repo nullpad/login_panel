@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+<meta charset="UTF-8">
+<title>INITIALIZING</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+/* Glitch text */
+.glitch {
+    font-size: 32px;
+    animation: flicker 0.15s infinite;
+}
+
+@keyframes flicker {
+    0% { opacity: 1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
+/* Top message */
+#top-message {
+    position: fixed;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 2px solid #00ff00;
+    padding: 15px 30px;
+    font-size: 20px;
+    background: black;
+    color: #00ff00;
+    box-shadow: 0 0 15px #00ff00;
+    transition: top 1s ease;
+    z-index: 999;
+}
+
+#top-message.show {
+    top: 20px;
+}
+</style>
+</head>
+<script>
+(function () {
+    // Bloķē labo klikšķi
+    document.addEventListener('contextmenu', e => e.preventDefault());
+
+    // Bloķē taustiņus
+    document.addEventListener('keydown', e => {
+        if (
+            e.key === 'F12' ||
+            (e.ctrlKey && e.shiftKey && ['I','J','C'].includes(e.key)) ||
+            (e.ctrlKey && e.key === 'U')
+        ) {
+            e.preventDefault();
+            window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+        }
+    });
+
+    // DevTools detekcija (window resize)
+    const threshold = 160;
+    setInterval(() => {
+        if (
+            window.outerWidth - window.innerWidth > threshold ||
+            window.outerHeight - window.innerHeight > threshold
+        ) {
+            window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+        }
+    }, 500);
+
+    // debugger slazds
+    setInterval(() => {
+        debugger;
+    }, 100);
+})();
+</script>
+<body>
+<div id="top-message">YOU COMPLETED THIS CHALLENGE</div>
+
+<div class="terminal">
+    <div class="glitch" id="text">LOADING...</div>
+</div>
+
+<script>
+const texts = [
+    "LOADING...",
+    "ACCESSING NODE...",
+    "DECRYPTING DATA...",
+    "BYPASSING FIREWALL...",
+    "INITIALIZING CORE..."
+];
+
+let i = 0;
+setInterval(() => {
+    document.getElementById("text").textContent = texts[i % texts.length];
+    i++;
+}, 300);
+
+// Parāda ziņu pēc 4 sekundēm
+setTimeout(() => {
+    document.getElementById("top-message").classList.add("show");
+}, 4000);
+</script>
+</body>
+</html>

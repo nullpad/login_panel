@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+<meta charset="UTF-8">
+<title>Secure Terminal Login</title>
+<style>
+    body {
+        background-color: #000;
+        color: #00ff00;
+        font-family: "Courier New", monospace;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .terminal {
+        border: 2px solid #00ff00;
+        padding: 30px;
+        width: 350px;
+        box-shadow: 0 0 20px #00ff00;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    input {
+        width: 100%;
+        background: black;
+        border: 1px solid #00ff00;
+        color: #00ff00;
+        padding: 8px;
+        margin-bottom: 15px;
+        font-family: inherit;
+    }
+
+    button {
+        width: 100%;
+        background: black;
+        border: 1px solid #00ff00;
+        color: #00ff00;
+        padding: 10px;
+        cursor: pointer;
+        font-family: inherit;
+    }
+
+    button:hover {
+        background: #00ff00;
+        color: black;
+    }
+
+    .error {
+        color: red;
+        text-align: center;
+        margin-top: 10px;
+    }
+</style>
+</head>
+<script>
+(function () {
+    // Bloķē labo klikšķi
+    document.addEventListener('contextmenu', e => e.preventDefault());
+
+    // Bloķē taustiņus
+    document.addEventListener('keydown', e => {
+        if (
+            e.key === 'F12' ||
+            (e.ctrlKey && e.shiftKey && ['I','J','C'].includes(e.key)) ||
+            (e.ctrlKey && e.key === 'U')
+        ) {
+            e.preventDefault();
+            window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+        }
+    });
+
+    // DevTools detekcija (window resize)
+    const threshold = 160;
+    setInterval(() => {
+        if (
+            window.outerWidth - window.innerWidth > threshold ||
+            window.outerHeight - window.innerHeight > threshold
+        ) {
+            window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+        }
+    }, 500);
+
+    // debugger slazds
+    setInterval(() => {
+        debugger;
+    }, 100);
+})();
+</script>
+<body>
+
+<div class="terminal">
+    <h1>ACCESS LOGIN</h1>
+
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+
+    <button onclick="login()">LOGIN</button>
+
+    <div class="error" id="error"></div>
+</div>
+
+<script>
+    const correctUsername = "Nullpad";
+    const correctPassword = "0padsystem";
+    let attempts = 0;
+
+    function login() {
+        const user = document.getElementById("username").value;
+        const pass = document.getElementById("password").value;
+        const error = document.getElementById("error");
+
+        if (user === correctUsername && pass === correctPassword) {
+            window.location.href = "loading.html";
+        } else {
+            attempts++;
+            error.textContent = "ACCESS DENIED (" + attempts + "/3)";
+
+            if (attempts >= 3) {
+                window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
